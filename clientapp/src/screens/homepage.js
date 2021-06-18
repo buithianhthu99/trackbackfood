@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import Menu from '../components/menu.js'
 import Web3 from 'web3';
 import {myblockchainAbi} from '../myblockchainAbi'
+import { contract_address } from "../config.js";
 
 export default function Homepage() {
   const currentProvider = new Web3.providers.HttpProvider('http://localhost:8545');
   const web3 = new Web3(currentProvider)
 
-  const contractAddress = "0xcE6661e6daD461b27d334E73873aca3e0519ec7A"; //Contract Address
+  const contractAddress = contract_address;
   const myblockchainContract = new web3.eth.Contract(myblockchainAbi, contractAddress);
 
   const account = localStorage.getItem("account");
