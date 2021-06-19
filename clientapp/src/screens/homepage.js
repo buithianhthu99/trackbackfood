@@ -1,39 +1,26 @@
 import React, { useState } from "react";
-<<<<<<< HEAD
 import Menu from "../components/menu.js";
+import "./homepage.css";
 import { Button } from "@material-ui/core";
 
 export default function Homepage() {
   const account = localStorage.getItem("account");
 
-  // //Add new harvest
-  // const data = {name: "test_harvest", owner: localStorage.getItem("account"), startTime: "10/06/2021", endTime: "20/06/2021"}
-  // const handleSubmit = () => {
-  //   console.log('Post method');
-  //   fetch("http://localhost:3000/harvests/", {
-  //       method: 'post',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify(data)
-  //   })
-=======
-import Menu from '../components/menu.js';
-import './homepage.css'
-import { Button } from '@material-ui/core';
-
-export default function Homepage() {
-  const account = localStorage.getItem("account");
-  
   //Add new harvest
-  const data = {name: "test_harvest", owner: localStorage.getItem("account"), startTime: "10/06/2021", endTime: "20/06/2021"}
-  const handleSubmit = () => {      
-    console.log('Post method');
-    fetch("http://localhost:3000/harvests/", {            
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    })
-  }
->>>>>>> 5792c575d2487b97d017d65cf9beafc823b0bd23
+  const data = {
+    name: "test_harvest",
+    owner: localStorage.getItem("account"),
+    startTime: "10/06/2021",
+    endTime: "20/06/2021",
+  };
+  const handleSubmit = () => {
+    console.log("Post method");
+    fetch("http://localhost:3000/harvests/", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+  };
 
   // //Add new product
   // const data = {harvestId: 0, owner: localStorage.getItem("account"), name: "Rice"}
@@ -64,22 +51,13 @@ export default function Homepage() {
   //       headers: { 'Content-Type': 'application/json' },
   //       body: JSON.stringify(data)
   //   })
-<<<<<<< HEAD
-
-  return (
-    <div className="App">
-      <Menu></Menu>
-      <p>{account}</p>
-      <Button>Click</Button>
-=======
   // }
 
   return (
     <div className="App">
-        <Menu></Menu>
-        <div className="public-address">Public address: {account}</div>
-        <Button onClick={handleSubmit}>Click</Button>
->>>>>>> 5792c575d2487b97d017d65cf9beafc823b0bd23
+      <Menu></Menu>
+      <div className="public-address">Public address: {account}</div>
+      <Button onClick={handleSubmit}>Click</Button>
     </div>
   );
 }
