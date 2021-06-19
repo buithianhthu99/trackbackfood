@@ -24,7 +24,7 @@ router.post('/', async function(req, res, next) {
 });
 
 //Get process
-router.get('/:harvestId/:productId/:processId', async function(req, res, next) {
+router.get('/detail/:harvestId/:productId/:processId', async function(req, res, next) {
     try {
         const result = await myblockchainContract.methods.getProcess(req.params.harvestId, req.params.productId, req.params.processId).call();
         console.log(result);
@@ -39,6 +39,27 @@ router.get('/:harvestId/:productId/:processId', async function(req, res, next) {
     }
 });
 
+//Get list processes by harvest id and product id
+router.get('/list/:harvestId/:productId', async function(req, res, next) {
+    try {        
+        const productInfo = await myblockchainContract.methods.getProduct(req.params.harvestId, req.params.productId).call();
+        const amount = productInfo["1"];
+
+        let final_result = [];
+        for (let i=0; i<amount; i++) {
+            const result = await myblockchainContract.methods.getProcess(req.params.harvestId, req.params.productId, i).call();
+            const return_result = {name: result["0"], ingredients: result["1"], startTime: result["2"], endTime: result["3"]}
+            final_result.push(return_result);   
+        }
+        res.json({
+            status: 200,
+            result: final_result,
+            message: "Get list processes by harvest id and product id successfully"
+        })
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 
 module.exports = router;

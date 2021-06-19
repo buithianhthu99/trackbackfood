@@ -37,7 +37,7 @@ router.post('/update', async function(req, res, next) {
 });
 
 //Get product
-router.get('/:harvestId/:productId', async function(req, res, next) {
+router.get('/detail/:harvestId/:productId', async function(req, res, next) {
     try {
         const result = await myblockchainContract.methods.getProduct(req.params.harvestId, req.params.productId).call();
         console.log(result);
@@ -52,6 +52,27 @@ router.get('/:harvestId/:productId', async function(req, res, next) {
     }
 });
 
+//Get list product by harvest id
+router.get('/list/:harvestId', async function(req, res, next) {
+    try {
+        const harvestInfo = await myblockchainContract.methods.getHarvest(req.params.harvestId).call();
+        const amount = harvestInfo["1"];
+        
+        let final_result = [];
+        for (let i=0; i<amount; i++) {
+            const result = await myblockchainContract.methods.getProduct(req.params.harvestId, i).call();
+            const return_result = {name: result["0"], processesAmount: result["1"], amount: result["2"], state: result["3"]}
+            final_result.push(return_result);   
+        }
+        res.json({
+            status: 200,
+            result: final_result,
+            message: "Get list product by harvest id successfully"
+        })
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 
 module.exports = router;
