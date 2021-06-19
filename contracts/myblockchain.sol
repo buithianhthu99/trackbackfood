@@ -2,7 +2,9 @@ pragma solidity >=0.4.21 <0.7.0;
 
 contract myblockchain {
     mapping(uint => Harvest) harvests;
+    mapping(uint => Product) products;
     uint public harvestsAmount = 0;
+    uint public totalProductsAmount = 0;
 
     struct Harvest  {
         uint harvestId;
@@ -15,12 +17,14 @@ contract myblockchain {
     }
 
     struct Product {
+        uint uniqueProductId;
         uint productId;
         string name;
         mapping(uint => Process) processes;
         uint processesAmount;
         uint amount;
         string state;
+        uint harvestId;
     }
 
     struct Process {
@@ -39,13 +43,18 @@ contract myblockchain {
         Product storage product = harvests[harvestId].products[productId];
         product.processes[id] = Process(id, _name, _ingredients, _startTime, _endTime);
         product.processesAmount++;
+        Product storage product_1 = products[product.uniqueProductId];
+        product_1.processes[id] = Process(id, _name, _ingredients, _startTime, _endTime);
+        product_1.processesAmount++;
     }
 
     function addProduct(uint harvestId, string memory _name) public {
         uint id = harvests[harvestId].productsAmount;
         Harvest storage harvest = harvests[harvestId];
-        harvest.products[id] = Product(id, _name, 0, 0, "unharvested");
+        harvest.products[id] = Product(totalProductsAmount, id, _name, 0, 0, "unharvested", harvestId);
         harvest.productsAmount++;
+        products[totalProductsAmount] = Product(totalProductsAmount, id, _name, 0, 0, "unharvested", harvestId);
+        totalProductsAmount++;
     }
 
     function updateProduct(uint harvestId, uint productId, string memory _name, uint _amount, string memory _state) public {
@@ -53,6 +62,10 @@ contract myblockchain {
         product.name = _name;
         product.amount = _amount;
         product.state = _state;
+        Product storage product_1 = products[product.uniqueProductId];
+        product_1.name = _name;
+        product_1.amount = _amount;
+        product_1.state = _state;
     }
 
     function addHarvest(string memory _name, address _owner, string memory _startTime, string memory _endTime) public {
@@ -74,28 +87,6 @@ contract myblockchain {
         return (harvests[harvestId].products[productId].processes[processId].name, harvests[harvestId].products[productId].processes[processId].ingredients, harvests[harvestId].products[productId].processes[processId].startTime, harvests[harvestId].products[productId].processes[processId].endTime);
     }
 
-    function uint2str(uint _i) internal pure returns (string memory _uintAsString) {
-        if (_i == 0) {
-            return "0";
-        }
-        uint j = _i;
-        uint len;
-        while (j != 0) {
-            len++;
-            j /= 10;
-        }
-        bytes memory bstr = new bytes(len);
-        uint k = len;
-        while (_i != 0) {
-            k = k-1;
-            uint8 temp = (48 + uint8(_i - _i / 10 * 10));
-            bytes1 b1 = bytes1(temp);
-            bstr[k] = b1;
-            _i /= 10;
-        }
-        return string(bstr);
-    }
-
     function getHarvestsAmount() public view returns(uint) {
         return harvestsAmount;
     }
@@ -113,5 +104,9 @@ contract myblockchain {
             }
         }
         return result;
+    }
+
+    function getProductByUniqueId(uint _uniqueProductId) public view returns(uint, uint, string memory, uint, uint, string memory, uint) {
+        return (products[_uniqueProductId].uniqueProductId, products[_uniqueProductId].productId, products[_uniqueProductId].name, products[_uniqueProductId].processesAmount, products[_uniqueProductId].amount, products[_uniqueProductId].state, products[_uniqueProductId].harvestId);
     }
 }
