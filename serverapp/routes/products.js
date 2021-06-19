@@ -70,7 +70,7 @@ router.get('/list/:harvestId', async function(req, res, next) {
         let final_result = [];
         for (let i=0; i<amount; i++) {
             const result = await myblockchainContract.methods.getProduct(req.params.harvestId, i).call();
-            const return_result = {name: result["0"], processesAmount: result["1"], amount: result["2"], state: result["3"]}
+            const return_result = {id: i, harvestId: req.params.harvestId, name: result["0"], processesAmount: result["1"], amount: result["2"], state: result["3"]}
             final_result.push(return_result);   
         }
         res.json({

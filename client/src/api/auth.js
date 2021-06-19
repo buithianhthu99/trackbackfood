@@ -22,4 +22,7 @@ export default request => ({
   addProduct(param) {
     return request.post("products/", param);
   },
+  productsByHarvestId(harvestId) {
+    return request.get(`products/list/${harvestId}`)
+  },
 });

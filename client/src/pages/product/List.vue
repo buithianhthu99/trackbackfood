@@ -94,14 +94,6 @@ export default {
           sortable: true,
         },
         {
-          name: 'owner',
-          required: true,
-          label: 'Owner',
-          align: 'left',
-          field: 'owner',
-          sortable: false,
-        },
-        {
           name: 'harvestId',
           align: 'left',
           label: 'Harvest Id',
@@ -136,7 +128,7 @@ export default {
     this.loading = true;
     this.harvestId = this.$route.query.harvestId
     try {
-      const res = await this.$api.harvestByOwnerId(this.$q.localStorage.getItem('account'))
+      const res = await this.$api.productsByHarvestId(this.harvestId)
       this.data = res.result
     } catch (error) {
       console.log(error)
