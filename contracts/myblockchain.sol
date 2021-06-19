@@ -2,7 +2,7 @@ pragma solidity >=0.4.21 <0.7.0;
 
 contract myblockchain {
     mapping(uint => Harvest) harvests;
-    uint harvestsAmount;
+    uint public harvestsAmount = 0;
 
     struct Harvest  {
         uint harvestId;
@@ -32,7 +32,6 @@ contract myblockchain {
     }
 
     constructor() public {
-        harvestsAmount = 0;
     }
 
     function addProcess(uint harvestId, uint productId, string memory _name, string memory _ingredients, string memory _startTime, string memory _endTime) public {
@@ -60,14 +59,11 @@ contract myblockchain {
         uint id = harvestsAmount;
         harvests[id] = Harvest(id, _name, 0, _owner, _startTime, _endTime);
         harvestsAmount++;
+        ownerHarvestCount[_owner]++;
     }
 
     function getHarvest(uint id) public view returns(string memory, uint, address, string memory, string memory) {
         return (harvests[id].name, harvests[id].productsAmount, harvests[id].owner, harvests[id].startTime, harvests[id].endTime);
-    }
-
-    function getHarvestsAmount() public returns(uint) {
-        return harvestsAmount;
     }
 
     function getProduct(uint harvestId, uint productId) public view returns(string memory, uint, uint, string memory) {
@@ -76,5 +72,46 @@ contract myblockchain {
 
     function getProcess(uint harvestId, uint productId, uint processId) public view returns(string memory, string memory, string memory, string memory) {
         return (harvests[harvestId].products[productId].processes[processId].name, harvests[harvestId].products[productId].processes[processId].ingredients, harvests[harvestId].products[productId].processes[processId].startTime, harvests[harvestId].products[productId].processes[processId].endTime);
+    }
+
+    function uint2str(uint _i) internal pure returns (string memory _uintAsString) {
+        if (_i == 0) {
+            return "0";
+        }
+        uint j = _i;
+        uint len;
+        while (j != 0) {
+            len++;
+            j /= 10;
+        }
+        bytes memory bstr = new bytes(len);
+        uint k = len;
+        while (_i != 0) {
+            k = k-1;
+            uint8 temp = (48 + uint8(_i - _i / 10 * 10));
+            bytes1 b1 = bytes1(temp);
+            bstr[k] = b1;
+            _i /= 10;
+        }
+        return string(bstr);
+    }
+
+    function getHarvestsAmount() public view returns(uint) {
+        return harvestsAmount;
+    }
+
+    mapping(address => uint) public ownerHarvestCount;
+
+    function getHarvestIDsByOwner(address _owner) public view returns(uint[] memory) {
+        uint[] memory result = new uint[](ownerHarvestCount[_owner]);
+        uint counter = 0;
+        
+        for (uint i = 0; i < harvestsAmount; i++) {
+            if (harvests[i].owner == _owner) {
+                result[counter] = i;
+                counter++;
+            }
+        }
+        return result;
     }
 }
