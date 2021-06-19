@@ -10,6 +10,6 @@
 - npm install
 - npm start
 # Run client
-- cd clientapp
-- npm install
-- npm start
+- cd client
+- yarn
+- quasar dev
