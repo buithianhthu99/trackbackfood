@@ -1,11 +1,14 @@
 <template>
   <q-page padding>
     <q-toolbar>
-      <q-toolbar-title>Harvest</q-toolbar-title>
+      <q-toolbar-title>
+        <q-toolbar-title> Product </q-toolbar-title>
+
+      </q-toolbar-title>
       <div class="row q-gutter-sm">
-        <q-btn color="primary" outline no-caps to="/my-own/harvest/new">
+        <q-btn color="primary" outline no-caps  :to="'/product/new?harvestId=' + harvestId ">
           <q-icon left name="add" />
-          <div class="gt-xs">Create a new harvest</div>
+          <div class="gt-xs">Create a new product</div>
         </q-btn>
       </div>
     </q-toolbar>
@@ -48,7 +51,7 @@
         <template v-slot:body-cell-actions="props">
           <q-td :props="props">
             <div class="rows items-start q-gutter-sm">
-              <q-btn dense flat icon="launch" @click="$router.push(`/product?harvestId=${props.row.id}`)" />
+              <q-btn dense flat icon="launch" @click="$router.push(`/process?harvestId=${props.row.harvestId}?productId=${props.row.id}`)" />
             </div>
           </q-td>
         </template>
@@ -64,6 +67,7 @@ export default {
     return {
       data: [],
       loading: false,
+      harvestId: null,
       q: '',
       mode: 'list',
 
@@ -78,9 +82,9 @@ export default {
         {
           name: 'id',
           align: 'left',
-          label: 'ID',
+          label: 'Id',
           field: 'id',
-          sortable: false,
+          sortable: true,
         },
         {
           name: 'name',
@@ -98,30 +102,31 @@ export default {
           sortable: false,
         },
         {
-          name: 'productsAmount',
+          name: 'harvestId',
           align: 'left',
-          label: 'Product amount',
-          field: 'productsAmount',
+          label: 'Harvest Id',
+          field: 'harvestId',
+          sortable: false,
+        },
+        {
+          name: 'processesAmount',
+          align: 'left',
+          label: 'Processes amount',
+          field: 'processesAmount',
           sortable: true,
         },
         {
-          name: 'startTime',
+          name: 'state',
           align: 'left',
-          label: 'Start time',
-          field: 'startTime',
-        },
-        {
-          name: 'endTime',
-          align: 'left',
-          label: 'End time',
-          field: 'endTime',
+          label: 'State',
+          field: 'state',
         },
         {
           name: 'actions',
           align: 'center',
           label: 'Actions',
           style: 'padding-right: 10px',
-        },
+        }
       ],
     };
   },
@@ -129,6 +134,7 @@ export default {
 
   async created() {
     this.loading = true;
+    this.harvestId = this.$route.query.harvestId
     try {
       const res = await this.$api.harvestByOwnerId(this.$q.localStorage.getItem('account'))
       this.data = res.result

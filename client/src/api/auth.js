@@ -18,5 +18,8 @@ export default request => ({
   },
   harvests() {
     return request.get('harvests/list')
-  }
+  },
+  addProduct(param) {
+    return request.post("products/", param);
+  },
 });

@@ -107,7 +107,7 @@ export default {
       year: new Date().getFullYear(),
       leftDrawerOpen: false,
       links1: [
-        { icon: 'dashboard', text: 'Trackback', to: '/' },
+        { icon: 'dashboard', text: 'Trackback', to: '/trackback' },
       ],
       links5: [{ icon: 'settings', text: 'My own', to: '/my-own' }],
     };

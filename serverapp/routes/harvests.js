@@ -102,11 +102,10 @@ router.get('/list', async function(req, res, next) {
 router.get('/listByOwner/:ownerId', async function(req, res, next) {
     try {
         const list_id = await myblockchainContract.methods.getHarvestIDsByOwner(req.params.ownerId).call();
-        console.log('list-id', list_id)
         let final_result = [];
         for (let i=0; i<list_id.length; i++) {
             const result = await myblockchainContract.methods.getHarvest(list_id[i]).call();
-            const return_result = {name: result["0"], productsAmount: result["1"], owner: result["2"], startTime: result["3"], endTime: result["4"]};
+            const return_result = {id: list_id[i], name: result["0"], productsAmount: result["1"], owner: result["2"], startTime: result["3"], endTime: result["4"]};
             final_result.push(return_result);   
         }
         res.json({

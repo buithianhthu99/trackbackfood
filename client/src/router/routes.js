@@ -2,8 +2,11 @@ const routes = [
   {
     path: "/",
     component: () => import("layouts/MainLayout.vue"),
+    redirect: {
+      path: '/trackback',
+    },
     children: [
-      { path: "", component: () => import("pages/Index.vue") },
+      { path: "/trackback", component: () => import("pages/Index.vue") },
       {
         path: '/my-own',
         component: () => import('pages/harvest/Index.vue'),
@@ -17,6 +20,22 @@ const routes = [
             path: '/my-own/harvest/new',
             name: 'my-own-new',
             component: () => import('pages/harvest/New.vue'),
+          },
+        ],
+      },
+      {
+        path: '/product',
+        component: () => import('pages/product/Index.vue'),
+        children: [
+          {
+            path: '/',
+            name: 'product',
+            component: () => import('pages/product/List.vue'),
+          },
+          {
+            path: '/product/new',
+            name: 'product-new',
+            component: () => import('pages/product/New.vue'),
           },
         ],
       },
