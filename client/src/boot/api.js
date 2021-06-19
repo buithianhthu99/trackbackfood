@@ -6,5 +6,5 @@ const apiRoot = {
 };
 
 export default ({ app, router, Vue }) => {
-  Vue.prototype.$api = apiRoot;
+  Vue.prototype.$api = apiRoot.auth;
 };

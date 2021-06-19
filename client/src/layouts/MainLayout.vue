@@ -125,7 +125,7 @@ export default {
   methods: {
     handleLogout(){
       this.$q.localStorage.remove('account')
-      
+      this.$router.push('/signin')
     },
   },
 

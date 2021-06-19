@@ -40,7 +40,24 @@ export default {
     async save() {
       this.$q.loading.show();
       let harvestInfo = await this.$refs.overviewRef.onValidate();
-      console.log(harvestInfo)
+      try {
+        await this.$api.addHarvest(harvestInfo)
+        this.$q.notify( {
+            type: 'positive',
+            position: 'top',
+            message: 'Create success'
+          }
+        )
+        this.$router.push('/harvest')
+      } catch (error) {
+        console.log(error)
+        this.$q.notify( {
+            type: 'negative',
+            position: 'top',
+            message: 'Create fail'
+          }
+        )
+      }
       this.$q.loading.hide();
     },
   },

@@ -9,5 +9,8 @@ export default request => ({
   },
   SignUp(param) {
     return request.post("users/signup", param);
-  }
+  },
+  addHarvest(param) {
+    return request.post("harvests/", param);
+  },
 });

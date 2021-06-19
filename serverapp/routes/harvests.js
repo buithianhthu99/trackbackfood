@@ -18,7 +18,17 @@ router.post('/', async function(req, res, next) {
         .addHarvest(req.body.name, req.body.owner, req.body.startTime, req.body.endTime)
         .send({ from: req.body.owner, gas });
         console.log(result);
+        res.json({
+          status: 200,
+          result: result,
+          message: "Create success"
+        })
     } catch (error) {
+        res.json({
+          status: 301,
+          result: result,
+          message: "Create fail"
+        })
         console.log(error);
     }
 });
