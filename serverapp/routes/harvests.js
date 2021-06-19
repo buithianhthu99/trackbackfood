@@ -68,4 +68,42 @@ router.get('/owner/:ownerId', async function(req, res, next) {
     }
 });
 
-module.exports = router;
+//Get list harvests
+router.get('/list', async function(req, res, next) {
+    try {
+        const amount = await myblockchainContract.methods.getHarvestsAmount().call();
+        let final_result = [];
+        for (let i=0; i<amount; i++) {
+            const result = await myblockchainContract.methods.getHarvest(i).call();
+            const return_result = {name: result["0"], productsAmount: result["1"], owner: result["2"], startTime: result["3"], endTime: result["4"]};
+            final_result.push(return_result);   
+        }
+        res.json({
+            status: 200,
+            result: final_result,
+            message: "Get list harvest successfully"
+        })
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+//Get list harvests by ownerId
+router.get('/listByOwner/:ownerId', async function(req, res, next) {
+    try {
+        const list_id = await myblockchainContract.methods.getHarvestIDsByOwner(req.params.ownerId).call();
+        let final_result = [];
+        for (let i=0; i<list_id.length; i++) {
+            const result = await myblockchainContract.methods.getHarvest(list_id[i]).call();
+            const return_result = {name: result["0"], productsAmount: result["1"], owner: result["2"], startTime: result["3"], endTime: result["4"]};
+            final_result.push(return_result);   
+        }
+        res.json({
+            status: 200,
+            result: final_result,
+            message: "Get list harvest by owner successfully"
+        })
+    } catch (error) {
+        console.log(error);
+    }
+});module.exports = router;
