@@ -178,11 +178,11 @@ export default function Menu() {
         <Divider />
         <List>
           {listMenu.map((item, index) => (
-            <ListItem button key={item.title}>
-              <Link href={item.link}>
-                <ListItemText primary={item.title} />
-              </Link>
-            </ListItem>
+            <Link href={item.link}>
+              <ListItem button key={item.title}>
+                  <ListItemText primary={item.title} />
+              </ListItem>
+            </Link>
           ))}
         </List>
       </Drawer>
