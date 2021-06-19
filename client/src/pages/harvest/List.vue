@@ -1,0 +1,155 @@
+<template>
+  <q-page padding>
+    <q-toolbar>
+      <q-toolbar-title>Harvest</q-toolbar-title>
+      <div class="row q-gutter-sm">
+        <q-btn color="primary" outline no-caps to="/harvest/new">
+          <q-icon left name="add" />
+          <div class="gt-xs">Create a new harvest</div>
+        </q-btn>
+      </div>
+    </q-toolbar>
+
+    <q-card flat bordered>
+      <q-table
+        :data="data"
+        :columns="columns"
+        row-key="id"
+        separator="cell"
+        :loading="loading"
+        :filter="q"
+        :filter-method="filterData"
+        :pagination="initialPagination"
+      >
+        <template v-slot:top="props">
+          <q-input
+            style="flex: auto"
+            outlined
+            dense
+            debounce="300"
+            :hint="q ? 'Search by: ' + q : ''"
+            v-model.trim="q"
+            placeholder="Search"
+          >
+            <template v-slot:append>
+              <q-icon name="search" />
+            </template>
+          </q-input>
+
+          <q-btn
+            flat
+            round
+            dense
+            :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
+            @click="props.toggleFullscreen"
+            class="q-ml-md q-mt-xs self-start"
+          />
+          <q-btn flat round dense icon="refresh" @click="reload" class="q-ml-md q-mt-xs self-start" />
+        </template>
+      </q-table>
+    </q-card>
+  </q-page>
+</template>
+
+<script>
+import { mapGetters } from 'vuex';
+import { date } from 'quasar';
+
+export default {
+  data() {
+    return {
+      data: [],
+      loading: false,
+      q: '',
+      mode: 'list',
+
+      initialPagination: {
+        page: 1,
+        rowsPerPage: 50,
+        sortBy: 'updatedAt',
+        descending: true,
+      },
+
+      columns: [
+        {
+          name: 'id',
+          required: true,
+          label: 'ID',
+          align: 'left',
+          field: 'id',
+          sortable: false,
+        },
+        {
+          name: 'name',
+          align: 'left',
+          label: 'Name',
+          field: 'name',
+          sortable: true,
+        },
+        {
+          name: 'startTime',
+          align: 'left',
+          label: 'Start time',
+          field: 'startTime',
+        },
+        {
+          name: 'endTime',
+          align: 'left',
+          label: 'End time',
+          field: 'endTime',
+        },
+      ],
+    };
+  },
+
+
+  created() {
+    this.data = [
+      {
+        id: 'adafsf23423422342',
+        name: 'asdad',
+        startTime: '12/12/2012',
+        endTime: '13/02/2013'
+      },
+      {
+        id: 'adafsf23423422342',
+        name: 'asdad',
+        startTime: '12/12/2012',
+        endTime: '13/02/2013'
+      },
+      {
+        id: 'adafsf23423422342',
+        name: 'asdad',
+        startTime: '12/12/2012',
+        endTime: '13/02/2013'
+      },
+      {
+        id: 'adafsf23423422342',
+        name: 'asdad',
+        startTime: '12/12/2012',
+        endTime: '13/02/2013'
+      },
+    ]
+  },
+
+  methods: {
+
+    filterData() {
+      return this.data.filter((item) => {
+        const q = this.q.toLowerCase();
+        return item.name.toLowerCase().includes(q);
+      });
+    },
+  },
+};
+</script>
+
+<style scoped>
+.contact-info {
+  min-height: 30px;
+  padding: 0;
+}
+.description {
+  white-space: normal;
+}
+</style>
