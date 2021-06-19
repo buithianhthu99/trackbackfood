@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import Menu from '../components/menu.js';
-import { Button } from '@material-ui/core';
+import Menu from "../components/menu.js";
+import { Button } from "@material-ui/core";
 
 export default function Homepage() {
   const account = localStorage.getItem("account");
-  
+
   // //Add new harvest
   // const data = {name: "test_harvest", owner: localStorage.getItem("account"), startTime: "10/06/2021", endTime: "20/06/2021"}
-  // const handleSubmit = () => {      
+  // const handleSubmit = () => {
   //   console.log('Post method');
-  //   fetch("http://localhost:3000/harvests/", {            
+  //   fetch("http://localhost:3000/harvests/", {
   //       method: 'post',
   //       headers: { 'Content-Type': 'application/json' },
   //       body: JSON.stringify(data)
@@ -17,9 +17,9 @@ export default function Homepage() {
 
   // //Add new product
   // const data = {harvestId: 0, owner: localStorage.getItem("account"), name: "Rice"}
-  // const handleSubmit = () => {      
+  // const handleSubmit = () => {
   //   console.log('Post method');
-  //   fetch("http://localhost:3000/products/", {            
+  //   fetch("http://localhost:3000/products/", {
   //       method: 'post',
   //       headers: { 'Content-Type': 'application/json' },
   //       body: JSON.stringify(data)
@@ -27,9 +27,9 @@ export default function Homepage() {
 
   // //Update product info
   // const data = {harvestId: 0, productId: 0, name: "Name update", amount: 10, state: "harvested", owner: localStorage.getItem("account")}
-  // const handleSubmit = () => {      
+  // const handleSubmit = () => {
   //   console.log('Post method');
-  //   fetch("http://localhost:3000/products/update/", {            
+  //   fetch("http://localhost:3000/products/update/", {
   //       method: 'post',
   //       headers: { 'Content-Type': 'application/json' },
   //       body: JSON.stringify(data)
@@ -37,20 +37,19 @@ export default function Homepage() {
 
   //Add process
   // const data = {harvestId: 0, productId: 0, name: "Test process", ingredients: "Saturated Fat 5g, Dietary Fiber 2g", startTime: "10/06/2021", endTime: "10/06/2021", owner: localStorage.getItem("account")}
-  // const handleSubmit = () => {      
+  // const handleSubmit = () => {
   //   console.log('Post method');
-  //   fetch("http://localhost:3000/processes/", {            
+  //   fetch("http://localhost:3000/processes/", {
   //       method: 'post',
   //       headers: { 'Content-Type': 'application/json' },
   //       body: JSON.stringify(data)
   //   })
-}
 
   return (
     <div className="App">
-        <Menu></Menu>
-        <p>{account}</p>
-        <Button onClick={handleSubmit}>Click</Button>
+      <Menu></Menu>
+      <p>{account}</p>
+      <Button>Click</Button>
     </div>
   );
 }
