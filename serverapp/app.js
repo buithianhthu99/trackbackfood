@@ -8,6 +8,10 @@ var app = express()
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var harvestsRouter = require('./routes/harvests');
+var productsRouter = require('./routes/products');
+var processesRouter = require('./routes/processes');
+
 
 var app = express();
 
@@ -24,6 +28,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/harvests', harvestsRouter);
+app.use('/products', productsRouter);
+app.use('/processes', processesRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

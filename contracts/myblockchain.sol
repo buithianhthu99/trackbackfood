@@ -1,7 +1,6 @@
 pragma solidity >=0.4.21 <0.7.0;
 
 contract myblockchain {
-    string greeting;
     mapping(uint => Harvest) harvests;
     uint harvestsAmount;
 
@@ -33,16 +32,7 @@ contract myblockchain {
     }
 
     constructor() public {
-        greeting = "hello";
         harvestsAmount = 0;
-    }
-
-    function getGreeting() public view returns(string memory) {
-        return greeting;
-    }
-
-    function setGreeting(string memory _greeting) public {
-        greeting = _greeting;
     }
 
     function addProcess(uint harvestId, uint productId, string memory _name, string memory _ingredients, string memory _startTime, string memory _endTime) public {
@@ -74,5 +64,17 @@ contract myblockchain {
 
     function getHarvest(uint id) public view returns(string memory, uint, address, string memory, string memory) {
         return (harvests[id].name, harvests[id].productsAmount, harvests[id].owner, harvests[id].startTime, harvests[id].endTime);
+    }
+
+    function getHarvestsAmount() public returns(uint) {
+        return harvestsAmount;
+    }
+
+    function getProduct(uint harvestId, uint productId) public view returns(string memory, uint, uint, string memory) {
+        return (harvests[harvestId].products[productId].name, harvests[harvestId].products[productId].processesAmount, harvests[harvestId].products[productId].amount, harvests[harvestId].products[productId].state);
+    }
+
+    function getProcess(uint harvestId, uint productId, uint processId) public view returns(string memory, string memory, string memory, string memory) {
+        return (harvests[harvestId].products[productId].processes[processId].name, harvests[harvestId].products[productId].processes[processId].ingredients, harvests[harvestId].products[productId].processes[processId].startTime, harvests[harvestId].products[productId].processes[processId].endTime);
     }
 }

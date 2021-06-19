@@ -54,7 +54,11 @@ export default function SignIn() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    fetch("http://localhost:3000/users/" + username + "/" + password)
+    fetch("http://localhost:3000/users/signin", {            
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({username, password})
+        })
       .then(
           res => res.json())
       .then(

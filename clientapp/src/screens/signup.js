@@ -11,9 +11,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useHistory} from 'react-router-dom'
 import Menu from '../components/menu.js'
-import Web3 from 'web3';
-import {myblockchainAbi} from '../myblockchainAbi'
-import { contract_address } from "../config.js";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -43,35 +40,13 @@ export default function SignUp() {
     const [address, setAddress] = useState("123");
     const history = useHistory();  
 
-    useEffect(()=>{
-        (async () => {
-            const currentProvider = new Web3.providers.HttpProvider('http://localhost:8545');
-            const web3 = new Web3(currentProvider);
-            const contractAddress = contract_address; //Contract Address
-            const myblockchainContract = new web3.eth.Contract(myblockchainAbi, contractAddress);
-            const accounts = await web3.eth.getAccounts();
-            fetch("http://localhost:3000/users/")
-            .then(
-                res => res.json())
-            .then(
-                (result) => {
-                    console.log(accounts[result.result.length])
-                    setAddress(accounts[result.result.length])
-                },
-                (error) => {
-                    console.log(error);
-                }
-            )
-        })();
-    },[])
-
     const handleSubmit = () => {      
         history.push("/login")
         console.log('Post method');
-        fetch("http://localhost:3000/users", {            
+        fetch("http://localhost:3000/users/signup", {            
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({name, username, password, address})
+            body: JSON.stringify({name, username, password})
         })
     }
 
