@@ -27,7 +27,7 @@
                   <q-item-section>Manage Account</q-item-section>
                 </q-item>
                 <q-separator />
-                <q-item clickable @click="signOut">
+                <q-item clickable @click="handleLogout()">
                   <q-item-section side>
                     <q-icon name="logout" />
                   </q-item-section>
@@ -96,7 +96,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'G4ULayout',
   data() {
@@ -124,16 +123,16 @@ export default {
     }
   },
   methods: {
-    signOut() {
+    handleLogout(){
+      this.$q.localStorage.remove('account')
       
     },
-
   },
+
 
   created() {
     console.log(this.account)
   },
-
 };
 </script>
 
