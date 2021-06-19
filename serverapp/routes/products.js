@@ -40,8 +40,17 @@ router.post('/update', async function(req, res, next) {
         .updateProduct(req.body.harvestId, req.body.productId, req.body.name, req.body.amount, req.body.state)
         .send({ from: req.body.owner, gas });
         console.log(result);
+        res.json({
+          status: 200,
+          result: result,
+          message: "Update success"
+        })
     } catch (error) {
         console.log(error);
+        res.json({
+          status: 301,
+          message: "Update fail"
+        })
     }
 });
 

@@ -25,4 +25,7 @@ export default request => ({
   productsByHarvestId(harvestId) {
     return request.get(`products/list/${harvestId}`)
   },
+  updateProduct(param) {
+    return request.post("products/update/", param);
+  },
 });
