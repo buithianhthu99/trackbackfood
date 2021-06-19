@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Menu from '../components/menu.js';
+import './homepage.css'
 import { Button } from '@material-ui/core';
 
 export default function Homepage() {
@@ -50,7 +51,7 @@ export default function Homepage() {
   return (
     <div className="App">
         <Menu></Menu>
-        <p>{account}</p>
+        <div className="public-address">Public address: {account}</div>
         <Button onClick={handleSubmit}>Click</Button>
     </div>
   );
