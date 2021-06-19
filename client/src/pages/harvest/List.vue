@@ -44,7 +44,6 @@
             @click="props.toggleFullscreen"
             class="q-ml-md q-mt-xs self-start"
           />
-          <q-btn flat round dense icon="refresh" @click="reload" class="q-ml-md q-mt-xs self-start" />
         </template>
       </q-table>
     </q-card>
@@ -112,19 +111,19 @@ export default {
         endTime: '13/02/2013'
       },
       {
-        id: 'adafsf23423422342',
+        id: 'adafsf23423422343',
         name: 'asdad',
         startTime: '12/12/2012',
         endTime: '13/02/2013'
       },
       {
-        id: 'adafsf23423422342',
+        id: 'adafsf23423422346',
         name: 'asdad',
         startTime: '12/12/2012',
         endTime: '13/02/2013'
       },
       {
-        id: 'adafsf23423422342',
+        id: 'adafsf23423422340',
         name: 'asdad',
         startTime: '12/12/2012',
         endTime: '13/02/2013'
