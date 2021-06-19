@@ -107,9 +107,9 @@ export default {
       year: new Date().getFullYear(),
       leftDrawerOpen: false,
       links1: [
-        { icon: 'dashboard', text: 'Harvest', to: '/harvest' },
+        { icon: 'dashboard', text: 'Trackback', to: '/' },
       ],
-      links5: [{ icon: 'settings', text: 'Settings', to: '/settings' }],
+      links5: [{ icon: 'settings', text: 'My own', to: '/my-own' }],
     };
   },
   filters: {

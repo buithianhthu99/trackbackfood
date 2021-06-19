@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
     <q-toolbar class="no-padding">
-      <q-btn dense outline icon="keyboard_backspace" v-go-back="{ name: 'harvest' }" />
+      <q-btn dense outline icon="keyboard_backspace" v-go-back="{ name: 'my-own' }" />
       <q-toolbar-title> Add Harvest </q-toolbar-title>
     </q-toolbar>
 
@@ -48,7 +48,7 @@ export default {
             message: 'Create success'
           }
         )
-        this.$router.push('/harvest')
+        this.$router.push('/my-own')
       } catch (error) {
         console.log(error)
         this.$q.notify( {

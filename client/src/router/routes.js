@@ -5,17 +5,17 @@ const routes = [
     children: [
       { path: "", component: () => import("pages/Index.vue") },
       {
-        path: '/harvest',
+        path: '/my-own',
         component: () => import('pages/harvest/Index.vue'),
         children: [
           {
             path: '/',
-            name: 'harvest',
+            name: 'my-own',
             component: () => import('pages/harvest/List.vue'),
           },
           {
-            path: '/harvest/new',
-            name: 'harvest-new',
+            path: '/my-own/harvest/new',
+            name: 'my-own-new',
             component: () => import('pages/harvest/New.vue'),
           },
         ],

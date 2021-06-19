@@ -13,4 +13,10 @@ export default request => ({
   addHarvest(param) {
     return request.post("harvests/", param);
   },
+  harvestByOwnerId(ownerId) {
+    return request.get(`harvests/listByOwner/${ownerId}`)
+  },
+  harvests() {
+    return request.get('harvests/list')
+  }
 });

@@ -3,7 +3,7 @@
     <q-toolbar>
       <q-toolbar-title>Harvest</q-toolbar-title>
       <div class="row q-gutter-sm">
-        <q-btn color="primary" outline no-caps to="/harvest/new">
+        <q-btn color="primary" outline no-caps to="/my-own/harvest/new">
           <q-icon left name="add" />
           <div class="gt-xs">Create a new harvest</div>
         </q-btn>
@@ -71,18 +71,25 @@ export default {
 
       columns: [
         {
-          name: 'id',
-          required: true,
-          label: 'ID',
-          align: 'left',
-          field: 'id',
-          sortable: false,
-        },
-        {
           name: 'name',
           align: 'left',
           label: 'Name',
           field: 'name',
+          sortable: true,
+        },
+        {
+          name: 'owner',
+          required: true,
+          label: 'Owner',
+          align: 'left',
+          field: 'owner',
+          sortable: false,
+        },
+        {
+          name: 'productsAmount',
+          align: 'left',
+          label: 'Product amount',
+          field: 'productsAmount',
           sortable: true,
         },
         {
@@ -102,33 +109,11 @@ export default {
   },
 
 
-  created() {
-    this.data = [
-      {
-        id: 'adafsf23423422342',
-        name: 'asdad',
-        startTime: '12/12/2012',
-        endTime: '13/02/2013'
-      },
-      {
-        id: 'adafsf23423422343',
-        name: 'asdad',
-        startTime: '12/12/2012',
-        endTime: '13/02/2013'
-      },
-      {
-        id: 'adafsf23423422346',
-        name: 'asdad',
-        startTime: '12/12/2012',
-        endTime: '13/02/2013'
-      },
-      {
-        id: 'adafsf23423422340',
-        name: 'asdad',
-        startTime: '12/12/2012',
-        endTime: '13/02/2013'
-      },
-    ]
+  async created() {
+    const res = await this.$api.harvestByOwnerId(this.$q.localStorage.getItem('account'))
+    this.data = res.result
+    // const res = await this.$api.harvests()
+    console.log(res)
   },
 
   methods: {
