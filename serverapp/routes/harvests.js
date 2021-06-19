@@ -24,7 +24,7 @@ router.post('/', async function(req, res, next) {
 });
 
 //Get harvest info
-router.get('/:harvestId', async function(req, res, next) {
+router.get('/info/:harvestId', async function(req, res, next) {
     try {
         const result = await myblockchainContract.methods.getHarvest(req.params.harvestId).call();
         const return_result = {name: result["0"], productsAmount: result["1"], owner: result["2"], startTime: result["3"], endTime: result["4"]}
@@ -32,6 +32,36 @@ router.get('/:harvestId', async function(req, res, next) {
             status: 200,
             result: return_result,
             message: "Get harvest successfully"
+          })
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+//Get harvests amount
+router.get('/harvestAmount', async function(req, res, next) {
+    try {
+        const result = await myblockchainContract.methods.getHarvestsAmount().call();
+        console.log(result);
+        res.json({
+            status: 200,
+            result: result,
+            message: "Get harvest amount successfully"
+          })
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+//Get harvests by owner
+router.get('/owner/:ownerId', async function(req, res, next) {
+    try {
+        const result = await myblockchainContract.methods.getHarvestIDsByOwner(req.params.ownerId).call();
+        console.log(result);
+        res.json({
+            status: 200,
+            result: result,
+            message: "Get harvest by owner successfully"
           })
     } catch (error) {
         console.log(error);
