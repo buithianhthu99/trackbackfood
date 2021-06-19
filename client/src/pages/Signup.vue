@@ -18,6 +18,17 @@
               <q-input
                 square
                 clearable
+                v-model="name"
+                type="name"
+                label="Name"
+              >
+                <template v-slot:prepend>
+                  <q-icon name="face" />
+                </template>
+              </q-input>
+              <q-input
+                square
+                clearable
                 v-model="username"
                 type="username"
                 label="Username"
@@ -46,6 +57,7 @@
               style="background:#067a15"
               class="full-width text-white"
               label="Get Started"
+              @click="submit()"
             />
           </q-card-actions>
           <q-card-section class="text-center q-pa-sm">
@@ -58,14 +70,29 @@
 </template>
 
 <script>
+import request from "src/api/request";
+import auth from "src/api/auth";
+const api = auth(request);
 export default {
   name: "Login",
   data() {
     return {
-      email: "",
+      name: "",
       username: "",
       password: ""
     };
+  },
+  methods:{
+    async submit(){
+      const params = {
+        name: this.name,
+        username: this.username,
+        password: this.password
+      };
+      const reponse = await api.SignUp(params);
+      if(reponse)
+        this.$router.push('/signin')      
+    }
   }
 };
 </script>

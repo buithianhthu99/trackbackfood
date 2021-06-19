@@ -61,7 +61,7 @@
 <script>
 import request from "src/api/request";
 import auth from "src/api/auth";
-
+import { LocalStorage } from "quasar";
 const api = auth(request);
 export default {
   name: "Login",
@@ -79,7 +79,10 @@ export default {
         password: this.password
       };
       const temp = await api.logIn(params);
-      console.log(temp);
+      if (temp){
+        LocalStorage.set('account',temp.result[0].address)
+        this.$router.push('/')
+      }
     }
   }
 };

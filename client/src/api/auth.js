@@ -7,6 +7,9 @@ export default request => ({
   logIn(param) {
     return request.post("users/signin", param);
   },
+  SignUp(param) {
+    return request.post("users/signup", param);
+  },
 
   //staff
   getEmployees(params) {
