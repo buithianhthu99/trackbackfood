@@ -50,7 +50,7 @@
             />
           </q-card-actions>
           <q-card-section class="text-center q-pa-sm">
-            <p class="text-grey-6">Forgot your password?</p>
+            <router-link class="text-grey-6" to="/signup">Don't have an account? Create now.</router-link>
           </q-card-section>
         </q-card>
       </div>
