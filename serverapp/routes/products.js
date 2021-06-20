@@ -40,8 +40,17 @@ router.post('/update', async function(req, res, next) {
         .updateProduct(req.body.harvestId, req.body.productId, req.body.name, req.body.amount, req.body.state)
         .send({ from: req.body.owner, gas });
         console.log(result);
+        res.json({
+          status: 200,
+          result: result,
+          message: "Update success"
+        })
     } catch (error) {
         console.log(error);
+        res.json({
+          status: 301,
+          message: "Update fail"
+        })
     }
 });
 
@@ -78,6 +87,22 @@ router.get('/list/:harvestId', async function(req, res, next) {
             result: final_result,
             message: "Get list product by harvest id successfully"
         })
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+//Get product
+router.get('/detailByUniqueId/:id', async function(req, res, next) {
+    try {
+        const result = await myblockchainContract.methods.getProductByUniqueId(req.params.id).call();
+        console.log(result);
+        const return_result = {uniqueProductId: result["0"], productId: result["1"], name: result["2"], processesAmount: result["3"], amount: result["4"], state: result["5"], harvestId: result["6"]}
+        res.json({
+            status: 200,
+            result: return_result,
+            message: "Get product by unique id successfully"
+          })
     } catch (error) {
         console.log(error);
     }

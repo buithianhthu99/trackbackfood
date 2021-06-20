@@ -40,6 +40,7 @@ export default {
     async save() {
       this.$q.loading.show();
       let productInfo = await this.$refs.overviewRef.onValidate();
+      console.log(productInfo)
       try {
         await this.$api.addProduct(productInfo)
         this.$q.notify( {
@@ -48,7 +49,7 @@ export default {
             message: 'Create success'
           }
         )
-        this.$router.push('/product')
+        this.$router.push(`/product?harvestId=${this.$route.query.harvestId}`)
       } catch (error) {
         console.log(error)
         this.$q.notify( {

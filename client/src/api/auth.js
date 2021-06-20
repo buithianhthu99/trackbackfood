@@ -31,4 +31,7 @@ export default request => ({
   GetProccessById(harvestId, ProductId) {
     return request.get(`processes/list/${harvestId}/${ProductId}`);
   }
+  updateProduct(param) {
+    return request.post("products/update/", param);
+  },
 });
