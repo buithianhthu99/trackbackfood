@@ -1,6 +1,7 @@
 <template>
   <q-page padding>
     <q-toolbar>
+      <q-btn dense outline icon="keyboard_backspace" v-go-back="`/my-own`" />
       <q-toolbar-title>
         <q-toolbar-title> Product </q-toolbar-title>
 
@@ -106,7 +107,7 @@ export default {
         {
           name: 'id',
           align: 'left',
-          label: 'Id',
+          label: 'ID',
           field: 'id',
           sortable: true,
         },
@@ -147,7 +148,7 @@ export default {
         {
           name: 'actions',
           align: 'center',
-          label: 'Actions',
+          label: 'Processes',
           style: 'padding-right: 10px',
         }
       ],

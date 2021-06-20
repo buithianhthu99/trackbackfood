@@ -1,6 +1,7 @@
 <template>
   <q-page padding>
     <q-toolbar>
+      <q-btn dense outline icon="keyboard_backspace" v-go-back="`/product?harvestId=${$route.query.harvestId}`" />
       <q-toolbar-title>
         <q-toolbar-title> Process </q-toolbar-title>
 
@@ -83,7 +84,7 @@ export default {
         {
           name: 'id',
           align: 'left',
-          label: 'Id',
+          label: 'ID',
           field: 'id',
           sortable: true,
         },
@@ -114,12 +115,6 @@ export default {
           label: 'End at',
           field: 'endTime',
           sortable: true,
-        },
-        {
-          name: 'actions',
-          align: 'center',
-          label: 'Actions',
-          style: 'padding-right: 10px',
         }
       ],
     };
