@@ -1,3 +1,3 @@
-module.exports={
-    contract_address:"0x084793608fb7a36047928e76A54857eCe8F4CE8e",
-}
+module.exports = {
+  contract_address: "0xc6Fe0Ff2342dB1C3BA55BCD2aD5b5b029b3443C0",
+};

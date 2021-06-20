@@ -2,13 +2,13 @@
   <q-page padding>
     <q-toolbar>
       <q-toolbar-title>
-        <q-toolbar-title> Product </q-toolbar-title>
+        <q-toolbar-title> Process </q-toolbar-title>
 
       </q-toolbar-title>
       <div class="row q-gutter-sm">
-        <q-btn color="primary" outline no-caps  :to="'/product/new?harvestId=' + harvestId ">
+        <q-btn color="primary" outline no-caps  :to="`/process/new?harvestId=${harvestId}&productId=${productId}`">
           <q-icon left name="add" />
-          <div class="gt-xs">Create a new product</div>
+          <div class="gt-xs">Create a new process</div>
         </q-btn>
       </div>
     </q-toolbar>
@@ -48,34 +48,10 @@
             class="q-ml-md q-mt-xs self-start"
           />
         </template>
-        <template v-slot:body-cell-name="props">
-          <q-td :props="props">
-            {{ props.value }}
-            <q-popup-edit v-model="props.row.name" title="Update name" @save="handleUpdate(props.row)" buttons>
-              <q-input type="text" v-model="props.row.name" dense autofocus />
-            </q-popup-edit>
-          </q-td>
-        </template>
-        <template v-slot:body-cell-amount="props">
-          <q-td :props="props">
-            {{ props.value }}
-            <q-popup-edit v-model="props.row.amount" title="Update amount" @save="handleUpdate(props.row)" buttons>
-              <q-input type="number" v-model="props.row.amount" dense autofocus />
-            </q-popup-edit>
-          </q-td>
-        </template>
-        <template v-slot:body-cell-state="props">
-          <q-td :props="props">
-            {{ props.value }}
-            <q-popup-edit v-model="props.row.state" title="Update state" @save="handleUpdate(props.row)" buttons>
-              <q-input type="text" v-model="props.row.state" dense autofocus />
-            </q-popup-edit>
-          </q-td>
-        </template>
         <template v-slot:body-cell-actions="props">
           <q-td :props="props">
             <div class="rows items-start q-gutter-sm">
-              <q-btn dense flat icon="launch" @click="$router.push(`/process?harvestId=${props.row.harvestId}&productId=${props.row.id}`)" />
+              <q-btn dense flat icon="launch" @click="$router.push(`/process?harvestId=${props.row.harvestId}?productId=${props.row.id}`)" />
             </div>
           </q-td>
         </template>
@@ -92,6 +68,7 @@ export default {
       data: [],
       loading: false,
       harvestId: null,
+      productId: null,
       q: '',
       mode: 'list',
 
@@ -118,31 +95,25 @@ export default {
           sortable: true,
         },
         {
-          name: 'amount',
+          name: 'ingredients',
           align: 'left',
-          label: 'Amount',
-          field: 'amount',
+          label: 'Ingredients',
+          field: 'ingredients',
           sortable: true,
         },
         {
-          name: 'harvestId',
+          name: 'startTime',
           align: 'left',
-          label: 'Harvest Id',
-          field: 'harvestId',
-          sortable: false,
-        },
-        {
-          name: 'processesAmount',
-          align: 'left',
-          label: 'Processes amount',
-          field: 'processesAmount',
+          label: 'Start at',
+          field: 'startTime',
           sortable: true,
         },
         {
-          name: 'state',
+          name: 'endTime',
           align: 'left',
-          label: 'State',
-          field: 'state',
+          label: 'End at',
+          field: 'endTime',
+          sortable: true,
         },
         {
           name: 'actions',
@@ -158,9 +129,11 @@ export default {
   async created() {
     this.loading = true;
     this.harvestId = this.$route.query.harvestId
+    this.productId = this.$route.query.productId
     try {
-      const res = await this.$api.productsByHarvestId(this.harvestId)
-      this.data = [...res.result]
+      const res = await this.$api.GetProccessById(this.harvestId,this.productId)
+      console.log(res)
+      this.data = res.result
     } catch (error) {
       console.log(error)
     }
@@ -168,32 +141,7 @@ export default {
   },
 
   methods: {
-    async handleUpdate(row) {
-      console.log(row)
-      const updateInfo = {
-        harvestId: row.harvestId,
-        productId: row.id,
-        amount: row.amount,
-        state: row.state,
-        name: row.name,
-        owner: this.$q.localStorage.getItem('account')
-      }
-      try {
-        await this.$api.updateProduct(updateInfo)
-        this.$q.notify({
-          type: 'positive',
-          position: 'top',
-          message: 'Update success'
-        })
-      } catch (error) {
-        console.log(error)
-        this.$q.notify({
-          type: 'negative',
-          position: 'top',
-          message: 'Update fail'
-        })
-      }
-    },
+
     filterData() {
       return this.data.filter((item) => {
         const q = this.q.toLowerCase();
