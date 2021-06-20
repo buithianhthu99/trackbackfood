@@ -6,7 +6,7 @@ const routes = [
       path: '/trackback',
     },
     children: [
-      { path: "/trackback", component: () => import("pages/Index.vue") },
+      { path: "/trackback", name: 'trackback', component: () => import("pages/Index.vue") },
       {
         path: '/my-own',
         component: () => import('pages/harvest/Index.vue'),

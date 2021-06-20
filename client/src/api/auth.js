@@ -16,6 +16,9 @@ export default request => ({
   harvestByOwnerId(ownerId) {
     return request.get(`harvests/listByOwner/${ownerId}`)
   },
+  harvestById(id) {
+    return request.get(`harvests/info/${id}`)
+  },
   harvests() {
     return request.get('harvests/list')
   },
@@ -25,7 +28,13 @@ export default request => ({
   productsByHarvestId(harvestId) {
     return request.get(`products/list/${harvestId}`)
   },
+  productByUniqueId(uniqueId) {
+    return request.get(`products/detailByUniqueId/${uniqueId}`)
+  },
   updateProduct(param) {
     return request.post("products/update/", param);
   },
+  processesByHarvestAndProduct(harvestId, productId) {
+    return request.get(`processes/list/${harvestId}/${productId}`)
+  }
 });
