@@ -10,7 +10,7 @@
 
             <q-input
               v-model="data.name"
-              label="Product name *"
+              label="Process name *"
               outlined
               dense
               stack-label

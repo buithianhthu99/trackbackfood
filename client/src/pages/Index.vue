@@ -119,6 +119,8 @@ export default {
       this.$router.push({query: {uniqueId: value}})
       if (value && value.length) {
         await this.load()
+      } else {
+        this.result = null
       }
     }
   },

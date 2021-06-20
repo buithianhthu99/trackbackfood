@@ -51,7 +51,8 @@ export default {
             message: 'Create success'
           }
         )
-        this.$router.push('/product')
+        this.$router.push(`/process?harvestId=${this.$route.query.harvestId}&productId=${this.$route.query.productId}`)
+        console.log(`/process?harvestId=${this.$route.query.harvestId}&productId=${this.$route.query.productId}`)
       } catch (error) {
         console.log(error)
         this.$q.notify( {
