@@ -1,10 +1,8 @@
 <template>
   <q-page padding>
     <q-toolbar>
-      <q-toolbar-title>
+        <q-btn dense outline icon="keyboard_backspace" v-go-back="{ name: 'my-own' }" />
         <q-toolbar-title> Product </q-toolbar-title>
-
-      </q-toolbar-title>
       <div class="row q-gutter-sm">
         <q-btn color="primary" outline no-caps  :to="'/product/new?harvestId=' + harvestId ">
           <q-icon left name="add" />
@@ -147,7 +145,7 @@ export default {
         {
           name: 'actions',
           align: 'center',
-          label: 'Actions',
+          label: 'Processes',
           style: 'padding-right: 10px',
         }
       ],

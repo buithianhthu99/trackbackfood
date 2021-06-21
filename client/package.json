@@ -1,8 +1,8 @@
 {
   "name": "client",
   "version": "0.0.1",
-  "description": "A Quasar Framework app",
-  "productName": "Quasar App",
+  "description": "A Blockchain system for trackback food",
+  "productName": "Trackback Food",
   "author": "ptt743 <55840736+ptt743@users.noreply.github.com>",
   "private": true,
   "scripts": {

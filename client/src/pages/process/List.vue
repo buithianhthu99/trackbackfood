@@ -1,10 +1,8 @@
 <template>
   <q-page padding>
     <q-toolbar>
-      <q-toolbar-title>
+        <q-btn dense outline icon="keyboard_backspace" v-go-back="{ name: 'product', query: {harvestId: $route.query.harvestId} }" />
         <q-toolbar-title> Process </q-toolbar-title>
-
-      </q-toolbar-title>
       <div class="row q-gutter-sm">
         <q-btn color="primary" outline no-caps  :to="`/process/new?harvestId=${harvestId}&productId=${productId}`">
           <q-icon left name="add" />
@@ -47,13 +45,6 @@
             @click="props.toggleFullscreen"
             class="q-ml-md q-mt-xs self-start"
           />
-        </template>
-        <template v-slot:body-cell-actions="props">
-          <q-td :props="props">
-            <div class="rows items-start q-gutter-sm">
-              <q-btn dense flat icon="launch" @click="$router.push(`/process?harvestId=${props.row.harvestId}?productId=${props.row.id}`)" />
-            </div>
-          </q-td>
         </template>
       </q-table>
     </q-card>
@@ -114,12 +105,6 @@ export default {
           label: 'End at',
           field: 'endTime',
           sortable: true,
-        },
-        {
-          name: 'actions',
-          align: 'center',
-          label: 'Actions',
-          style: 'padding-right: 10px',
         }
       ],
     };

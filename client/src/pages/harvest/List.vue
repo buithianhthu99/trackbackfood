@@ -119,7 +119,7 @@ export default {
         {
           name: 'actions',
           align: 'center',
-          label: 'Actions',
+          label: 'Products',
           style: 'padding-right: 10px',
         },
       ],
