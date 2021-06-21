@@ -2,7 +2,7 @@
 <template>
   <q-page padding>
     <q-toolbar class="no-padding">
-      <q-btn dense outline icon="keyboard_backspace" v-go-back="{ name: 'product' }" />
+      <q-btn dense outline icon="keyboard_backspace" v-go-back="`/process?harvestId=${$route.query.harvestId}&productId=${$route.query.productId}`" />
       <q-toolbar-title> Add Process </q-toolbar-title>
     </q-toolbar>
 
@@ -15,7 +15,7 @@
         <q-toolbar-title class="text-subtitle1"> Unsaved changes </q-toolbar-title>
 
         <div class="q-gutter-sm">
-          <q-btn flat label="Discard" no-caps v-go-back="'/product'" />
+          <q-btn flat label="Discard" no-caps v-go-back="`/process?harvestId=${$route.query.harvestId}&productId=${$route.query.productId}`" />
           <q-btn color="primary" no-caps label="Save" :disable="!changed" @click.prevent="save" />
         </div>
       </q-toolbar>

@@ -74,7 +74,7 @@ export default {
         {
           name: 'id',
           align: 'left',
-          label: 'Id',
+          label: 'ID',
           field: 'id',
           sortable: true,
         },
