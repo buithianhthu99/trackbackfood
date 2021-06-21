@@ -3,7 +3,7 @@
     <q-toolbar>
       <q-toolbar-title>Harvest</q-toolbar-title>
       <div class="row q-gutter-sm">
-        <q-btn color="primary" outline no-caps to="/my-own/harvest/new">
+        <q-btn color="primary" unelevated no-caps to="/my-own/harvest/new">
           <q-icon left name="add" />
           <div class="gt-xs">Create a new harvest</div>
         </q-btn>
@@ -12,6 +12,7 @@
 
     <q-card flat bordered>
       <q-table
+        class="table-color"
         :data="data"
         :columns="columns"
         row-key="id"
@@ -150,7 +151,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss">
 .contact-info {
   min-height: 30px;
   padding: 0;

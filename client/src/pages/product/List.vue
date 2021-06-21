@@ -4,7 +4,7 @@
         <q-btn dense outline icon="keyboard_backspace" v-go-back="{ name: 'my-own' }" />
         <q-toolbar-title> Product </q-toolbar-title>
       <div class="row q-gutter-sm">
-        <q-btn color="primary" outline no-caps  :to="'/product/new?harvestId=' + harvestId ">
+        <q-btn color="primary" unelevated no-caps  :to="'/product/new?harvestId=' + harvestId ">
           <q-icon left name="add" />
           <div class="gt-xs">Create a new product</div>
         </q-btn>
@@ -13,6 +13,7 @@
 
     <q-card flat bordered>
       <q-table
+        class="table-color"
         :data="data"
         :columns="columns"
         row-key="id"

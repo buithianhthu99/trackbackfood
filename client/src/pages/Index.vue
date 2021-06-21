@@ -43,6 +43,7 @@
         <div class="col-12 q-mt-md">
           <div class="text-h6">Processes</div>
           <q-table
+            class="table-color"
             :data="result.processes"
             :columns="columns"
             row-key="id"

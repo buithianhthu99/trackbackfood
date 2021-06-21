@@ -1,10 +1,12 @@
 <template>
-  <q-layout view="lHh lpR lFf" class="bg-grey-1">
+  <q-layout view="hHh lpR lFf" class="bg-grey-1">
     <q-header bordered class="bg-white text-grey-8">
       <q-toolbar class="G4U__toolbar">
         <q-btn flat dense round @click="leftDrawerOpen = !leftDrawerOpen" aria-label="Menu" icon="menu" class="q-mr-sm" />
-
-        <q-toolbar-title shrink class="row items-center no-wrap">
+        <q-toolbar-title shrink class="row items-center no-wrap q-pr-none">
+            <img src="favicon.ico" style="width: 35px; height: 35px"/>
+        </q-toolbar-title>
+        <q-toolbar-title shrink class="row items-center text-h5 text-weight-bold no-wrap q-pl-none">
             <div>Trackback</div>
         </q-toolbar-title>
 
@@ -20,12 +22,12 @@
 
             <q-menu transition-show="scale" transition-hide="scale" fit>
               <q-list style="min-width: 200px">
-                <q-item clickable to="/account">
+                <!-- <q-item clickable to="/account">
                   <q-item-section side>
                     <q-icon name="manage_accounts" />
                   </q-item-section>
                   <q-item-section>Manage Account</q-item-section>
-                </q-item>
+                </q-item> -->
                 <q-separator />
                 <q-item clickable @click="handleLogout()">
                   <q-item-section side>
@@ -43,6 +45,8 @@
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered content-class="bg-white column" :width="280">
       <q-scroll-area class="G4U__drawer-menu">
         <q-list padding class="text-grey-8">
+          <!-- <q-item/>
+          <q-separator inset class="q-mb-sm" /> -->
           <q-item
             class="G4U__drawer-item"
             v-ripple
@@ -50,7 +54,7 @@
             :key="link.text"
             clickable
             :to="link.to"
-            active-class="bg-teal-1 text-grey-8"
+            active-class="bg-green-2 text-grey-8"
           >
             <q-item-section avatar>
               <q-icon :name="link.icon" />
@@ -68,7 +72,7 @@
             :key="link.text"
             clickable
             :to="link.to"
-            active-class="bg-teal-1 text-grey-8"
+            active-class="bg-green-2 text-grey-8"
           >
             <q-item-section avatar>
               <q-icon :name="link.icon" />
@@ -77,6 +81,7 @@
               <q-item-label>{{ link.text }}</q-item-label>
             </q-item-section>
           </q-item>
+          <q-separator inset class="q-my-sm" />
         </q-list>
       </q-scroll-area>
       <div>

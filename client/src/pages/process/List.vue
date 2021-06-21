@@ -4,7 +4,7 @@
         <q-btn dense outline icon="keyboard_backspace" v-go-back="{ name: 'product', query: {harvestId: $route.query.harvestId} }" />
         <q-toolbar-title> Process </q-toolbar-title>
       <div class="row q-gutter-sm">
-        <q-btn color="primary" outline no-caps  :to="`/process/new?harvestId=${harvestId}&productId=${productId}`">
+        <q-btn color="primary" unelevated no-caps  :to="`/process/new?harvestId=${harvestId}&productId=${productId}`">
           <q-icon left name="add" />
           <div class="gt-xs">Create a new process</div>
         </q-btn>
@@ -13,6 +13,7 @@
 
     <q-card flat bordered>
       <q-table
+        class="table-color"
         :data="data"
         :columns="columns"
         row-key="id"
