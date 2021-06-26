@@ -39,8 +39,8 @@ export default {
   methods: {
     async save() {
       this.$q.loading.show();
-      let harvestInfo = await this.$refs.overviewRef.onValidate();
       try {
+        let harvestInfo = await this.$refs.overviewRef.onValidate();
         await this.$api.addHarvest(harvestInfo)
         this.$q.notify( {
             type: 'positive',

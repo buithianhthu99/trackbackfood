@@ -41,9 +41,8 @@ export default {
   methods: {
     async save() {
       this.$q.loading.show();
-      let processInfo = await this.$refs.overviewRef.onValidate();
-      console.log(processInfo)
       try {
+        let processInfo = await this.$refs.overviewRef.onValidate();
         await this.$api.addProcess(processInfo)
         this.$q.notify( {
             type: 'positive',

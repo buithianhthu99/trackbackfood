@@ -39,9 +39,8 @@ export default {
   methods: {
     async save() {
       this.$q.loading.show();
-      let productInfo = await this.$refs.overviewRef.onValidate();
-      console.log(productInfo)
       try {
+        let productInfo = await this.$refs.overviewRef.onValidate();
         await this.$api.addProduct(productInfo)
         this.$q.notify( {
             type: 'positive',
